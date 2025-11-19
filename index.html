@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sutra - Order Sanskrit Quote Posters here</title>
   <link rel="stylesheet" href="./dist/output.css" />
+  <link rel="icon" type="image/png" href="logo_sutra.png">
 </head>
 
 <body class="cursor-default">
@@ -44,7 +45,8 @@
               <circle cx="19" cy="21" r="1"></circle>
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
             </svg>
-            <span id="cartItems" class="absolute top-0 right-0 translate-x-2 -translate-y-1 rounded-md h-5 w-5 bg-[#f97316] text-white font-medium text-xs items-center justify-center hidden">0</span>
+            <span id="cartItems"
+              class="absolute top-0 right-0 translate-x-2 -translate-y-1 rounded-md h-5 w-5 bg-[#f97316] text-white font-medium text-xs items-center justify-center hidden">0</span>
           </button>
         </div>
       </navbar>
@@ -102,24 +104,24 @@
             <p class="h-6 text-base text-gray-600 w-full text-center">Handpicked quotes for your sanctuary</p>
           </div>
           <!-- poster Cards goes here -->
-          <div class="flex flex-col gap-8 w-full">
+          <div id="postersArea" class="flex flex-col gap-8 w-full">
             <!-- line1 -->
             <div id="cardLine1" class="flex gap-5 w-full">
               <!-- card1 -->
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/Firefly 20251112202430.png" alt="poster1"
+                  <img id="itemPoster" src="Posters/Firefly 20251112202430.png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">You Become What You Think</h3>
-                    <p class="text-sm text-gray-500">यत् भावो — तत् भवति</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">You Become What You Think</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">यत् भावो — तत् भवति</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -130,17 +132,17 @@
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/धैर्यं सर्वत्र साधनम्.png" alt="poster1"
+                  <img id="itemPoster" src="Posters/धैर्यं सर्वत्र साधनम्.png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">Strength in Stillness</h3>
-                    <p class="text-sm text-gray-500">धैर्यं सर्वत्र साधनम्</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">Strength in Stillness</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">धैर्यं सर्वत्र साधनम्</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -150,17 +152,17 @@
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/poster 4.png" alt="poster1"
+                  <img id="itemPoster" src="Posters/poster 4.png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">Touch the Sky</h3>
-                    <p class="text-sm text-gray-500">नभः स्पृशं दीप्तम्</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">Touch the Sky</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">नभः स्पृशं दीप्तम्</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -173,17 +175,17 @@
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/योगः कर्मसु कौशलम्.png" alt="poster1"
+                  <img id="itemPoster" src="Posters/योगः कर्मसु कौशलम्.png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">Mastery in Action</h3>
-                    <p class="text-sm text-gray-500">योगः कर्मसु कौशलम्</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">Mastery in Action</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">योगः कर्मसु कौशलम्</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -193,17 +195,17 @@
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/poster expanded (1).png" alt="poster1"
+                  <img id="itemPoster" src="Posters/poster expanded (1).png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">Growth Over Comfort</h3>
-                    <p class="text-sm text-gray-500">सुखार्थिनः कुतो विद्या</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">Growth Over Comfort</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">सुखार्थिनः कुतो विद्या</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -213,17 +215,17 @@
               <div
                 class="flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg">
                 <div class="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full">
-                  <img src="Posters/विद्या ददाति विनयम्.png" alt="poster1"
+                  <img id="itemPoster" src="Posters/विद्या ददाति विनयम्.png" alt="poster1"
                     class="transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center">
                 </div>
                 <div class="p-4">
                   <div class="mb-3">
-                    <h3 class="text-base mb-1 h-6 font-medium">Grace Through Knowledge</h3>
-                    <p class="text-sm text-gray-500">विद्या ददाति विनयम्</p>
+                    <h3 class="text-base mb-1 h-6 font-medium" id="itemTitle">Grace Through Knowledge</h3>
+                    <p class="text-sm text-gray-500" id="itemSubTitle">विद्या ददाति विनयम्</p>
                   </div>
-                  <div class="flex justify-between py-2 items-center">
+                  <div id="itemPrice" class="flex justify-between py-2 items-center">
                     <div>₹129</div>
-                    <div 
+                    <div
                       class="addToCart rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                       Add to Cart</div>
                   </div>
@@ -299,8 +301,8 @@
           </path>
         </svg>
         <p class="font-semibold">Shopping Cart</p>
-        <div
-          class="minimizer absolute right-5 top-6 z-1001 hover:bg-gray-100 rounded-full flex justify-center items-center size-6 transition-colors duration-200 ease-in-out cursor-pointer">
+        <div id="cartMinimizer"
+          class="absolute right-5 top-6 z-1001 hover:bg-gray-100 rounded-full flex justify-center items-center size-6 transition-colors duration-200 ease-in-out cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" size-4">
             <path d="M18 6 6 18"></path>
@@ -310,7 +312,7 @@
       </header>
       <!-- cart item list -->
       <!-- empty cart goes here -->
-      <div class="h-full flex flex-col items-center justify-center">
+      <div id="emptyCart" class="h-full flex flex-col items-center justify-center">
         <div class="h-23 w-23 rounded-full bg-gray-100 flex justify-center items-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -324,27 +326,30 @@
         </div>
         <div class="flex flex-col items-center mb-4">
           <h3 class="text-lg mb-2 text-[#111111] font-normal">Your cart is empty</h3>
-          <p class="text-sm text-gray-500">Add some beautiful Sanskrit posters to get started!</p>
+          <p class="text-sm text-gray-500" id="itemSubTitle">Add some beautiful Sanskrit posters to get started!</p>
         </div>
         <div id="continueShopping"
           class="h-9 py-2 px-4 mt-4 border border-gray-200 text-sm rounded-md flex justify-center items-center font-semibold hover:bg-gray-200 transition-colors duration-200 ease-in-out cursor-default">
           Continue Shopping
         </div>
-        <!-- empty cart ends here -->
-        <!-- cart item list -->
-        <div class="px-6">
-          <template>
+      </div>
+      <!-- empty cart ends here -->
+      <!-- cart item list -->
+      <div id="cartItemList" class="px-6 h-57/100 overflow-y-scroll hidden">
+        <div>
+          <template id="cartItem">
             <div
-              class="p-3 mt-3 border border-gray-100 rounded-xl hover:shadow-sm transition-shadow duration-200 ease-in-out mb-4">
+              class="cartItem p-3 mt-3 border border-gray-100 rounded-xl hover:shadow-sm transition-shadow duration-200 ease-in-out mb-4">
               <div class="flex gap-4 items-center h-24">
                 <div class="left h-24 w-20 rounded-lg overflow-hidden shrink-0">
-                  <img class="h-full w-full block object-cover object-center" src="Posters/poster.png" alt="">
+                  <img id="cartItemImg" class="h-full w-full block object-cover object-center" src="Posters/poster.png"
+                    alt="">
                 </div>
                 <div class="right flex flex-col w-full h-full">
                   <div class="mb-2 flex w-full h-full relative">
                     <div class="pr-8 w-full h-12">
-                      <h4 class="text-sm text-[#111]">Inner Peace</h4>
-                      <p class="text-xs text-gray-500">शांति</p>
+                      <h4 id="cartItemTitle" class="text-sm text-[#111]">Inner Peace</h4>
+                      <p id="cartItemSubTitle" class="text-xs text-gray-500">शांति</p>
                     </div>
                     <div id="deleteBtn"
                       class="size-8 flex items-center justify-center absolute right-0 top-0 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200 ease-in-out">
@@ -362,7 +367,7 @@
                   <div class="flex w-full justify-between items-center">
                     <!-- quantity addition/subtraction buttons -->
                     <div class="border border-gray-200 rounded-lg w-fit flex items-center">
-                      <button
+                      <button id="reduceBtn"
                         class="size-7 flex items-center justify-center rounded-md hover:bg-gray-50 transition-colors duration-200 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -371,7 +376,7 @@
                         </svg>
                       </button>
                       <span class="size-7 flex items-center justify-center">1</span>
-                      <button
+                      <button id="addBtn"
                         class="size-7 flex items-center justify-center rounded-md hover:bg-gray-50 transition-colors duration-200 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -382,7 +387,7 @@
                       </button>
                     </div>
                     <!-- price Tag -->
-                    <div class="text-sm">
+                    <div id="cartItemPrice" class="text-sm">
                       ₹129
                     </div>
                   </div>
@@ -390,263 +395,263 @@
               </div>
             </div>
           </template>
-          <div
-            class="sumUp absolute bottom-0 left-0 w-full h-auto py-4 px-6 bg-gray-50 border-t border-t-gray-100 hidden">
-            <div class="top mb-4">
-              <div class="subTotal flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
-                <div class="key text-gray-600">Subtotal</div>
-                <div class="value">₹109.32</div>
-              </div>
-              <div class="shipping flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
-                <div class="key text-gray-600">Shipping</div>
-                <div class="value">₹61</div>
-              </div>
-              <div class="gst flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
-                <div class="key text-gray-600">GST(18%)</div>
-                <div class="value">₹19.68</div>
-              </div>
-              <div
-                class="total flex items-center justify-between mb-2 text-lg pt-3 border-t border-t-gray-300 mt-2 text-[#111111]">
-                <div class="key text-gray-600">Total</div>
-                <div class="value text-2xl">₹190</div>
-              </div>
+        </div>
+        <div class="sumUp absolute bottom-0 left-0 w-full h-auto py-4 px-6 bg-gray-50 border-t border-t-gray-100 ">
+          <div class="top mb-4">
+            <div class="subTotal flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
+              <div class="key text-gray-600">Subtotal</div>
+              <div id="subTotal" class="value">₹109.32</div>
             </div>
-            <div class="bottom">
-              <button
-                class="checkout h-12 w-full rounded-xl bg-[#f97316] text-white font-medium mb-4 hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
-                Proceed to Checkout
-              </button>
-              <p class="text-xs text-gray-500 text-center">Secure checkout • Free shipping on orders over ₹350</p>
+            <div class="shipping flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
+              <div class="key text-gray-600">Shipping</div>
+              <div class="value">₹61</div>
             </div>
+            <div class="gst flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
+              <div class="key text-gray-600">GST(18%)</div>
+              <div id="gst" class="value">₹19.68</div>
+            </div>
+            <div
+              class="total flex items-center justify-between mb-2 text-lg pt-3 border-t border-t-gray-300 mt-2 text-[#111111]">
+              <div class="key text-gray-600">Total</div>
+              <div id="total" class="value text-2xl">₹190</div>
+            </div>
+          </div>
+          <div class="bottom">
+            <button
+              class="checkout h-12 w-full rounded-xl bg-[#f97316] text-white font-medium mb-4 hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
+              Proceed to Checkout
+            </button>
+            <p class="text-xs text-gray-500 text-center">Secure checkout • Free shipping on orders over ₹350</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="fixed top-0 left-0 w-full h-full z-1000 backdrop-brightness-55 hidden">
-      <!-- final Review and Payment Section -->
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 max-h-[90vh] shadow-lg flex flex-col gap-4 w-full overflow-hidden max-w-2xl sm:max-w-lg rounded-xl">
-        <div class="flex justify-between items-center">
-          <h3 class="text-lg font-semibold">Checkout</h3>
-          <button
-            class="transition-colors duration-200 ease-in-out rounded-sm hover:bg-gray-200 cursor-default size-6 flex justify-center items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-x h-5 w-5" aria-hidden="true">
-              <path d="M18 6 6 18"></path>
-              <path d="m6 6 12 12"></path>
-            </svg>
-          </button>
+  </div>
+  <div class="fixed top-0 left-0 w-full h-full z-1000 backdrop-brightness-55 hidden">
+    <!-- final Review and Payment Section -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 max-h-[90vh] shadow-lg flex flex-col gap-4 w-full overflow-hidden max-w-2xl sm:max-w-lg rounded-xl">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-semibold">Checkout</h3>
+        <button
+          class="transition-colors duration-200 ease-in-out rounded-sm hover:bg-gray-200 cursor-default size-6 flex justify-center items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-x h-5 w-5" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div>
+        <div class="line mb-4 w-full overflow-hidden rounded-full h-2 bg-[#03021333]">
+          <div class="h-2 w-full bg-[#030213] -translate-x-3/4"></div>
         </div>
-        <div>
-          <div class="line mb-4 w-full overflow-hidden rounded-full h-2 bg-[#03021333]">
-            <div class="h-2 w-full bg-[#030213] -translate-x-3/4"></div>
-          </div>
-          <div class="flex items-center w-full justify-between">
-            <div class="flex flex-1 items-center gap-2 flex-col">
-              <div class="h-10 w-10 flex justify-center items-center text-white bg-[#f97316] rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-truck h-5 w-5" aria-hidden="true">
-                  <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-                  <path d="M15 18H9"></path>
-                  <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-                  <circle cx="17" cy="18" r="2"></circle>
-                  <circle cx="7" cy="18" r="2"></circle>
-                </svg>
-              </div>
-              <p class="text-xs text-[#f97316]">Shipping</p>
-            </div>
-            <div class="flex flex-1 items-center gap-2 flex-col">
-              <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-credit-card h-5 w-5" aria-hidden="true">
-                  <rect width="20" height="14" x="2" y="5" rx="2"></rect>
-                  <line x1="2" x2="22" y1="10" y2="10"></line>
-                </svg>
-              </div>
-              <p class="text-xs text-gray-400">Payment</p>
-            </div>
-            <div class="flex flex-1 items-center gap-2 flex-col">
-              <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-package h-5 w-5" aria-hidden="true">
-                  <path
-                    d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
-                  </path>
-                  <path d="M12 22V12"></path>
-                  <polyline points="3.29 7 12 12 20.71 7"></polyline>
-                  <path d="m7.5 4.27 9 5.15"></path>
-                </svg>
-              </div>
-              <p class="text-xs text-gray-400">Review</p>
-            </div>
-            <div class="flex flex-1 items-center gap-2 flex-col">
-              <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-circle-check-big h-5 w-5" aria-hidden="true">
-                  <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                  <path d="m9 11 3 3L22 4"></path>
-                </svg>
-              </div>
-              <p class="text-xs text-gray-400">Complete</p>
-            </div>
-          </div>
-        </div>
-        <div class="border h-0 w-full border-gray-200"></div>
-        <!-- address input -->
-        <div class="py-4 overflow-y-auto custom-scroll hidden">
-          <div class="flex flex-col w-full h-auto gap-3">
-            <h3 class="text-lg text-[#111111]">Shipping Information</h3>
-            <!-- name input -->
-            <div class="flex flex-col w-full h-auto">
-              <label class="flex items-start w-fit text-sm font-medium" for="name">Full Name *</label>
-              <input type="text" id="name" required placeholder="RadheShyam"
-                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-            </div>
-            <!-- email and phone input -->
-            <div class="flex items-center w-full h-auto gap-4">
-              <div class="flex flex-col w-1/2 h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="email">Email *</label>
-                <input type="text" required id="email" placeholder="RadheShyam@gmail.com"
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-              <div class="flex flex-col w-1/2 h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="phone">Phone No. *</label>
-                <input type="text" id="phone" placeholder="99711XXXXX" required
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-            </div>
-            <!-- address input  -->
-            <div class="flex flex-col w-full h-auto">
-              <label class="flex items-start w-fit text-sm font-medium" for="address">Address *</label>
-              <input type="text" id="address" required placeholder="Locality Address"
-                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-            </div>
-            <!-- city and state Input -->
-            <div class="flex items-center w-full h-auto gap-4">
-              <div class="flex flex-col w-1/2 h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="city">City *</label>
-                <input type="text" required id="city" placeholder="New Delhi"
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-              <div class="flex flex-col w-1/2 h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="state">State *</label>
-                <input type="text" id="state" placeholder="NCT of Delhi" required
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <!-- shipping section ends Here -->
-        <!-- payment section starts Here -->
-        <div class="py-4 overflow-y-auto custom-scroll">
-          <div class="flex flex-col w-full h-auto gap-3">
-            <h3 class="text-lg text-[#111111]">Payment Method</h3>
-            <button id="card" class="flex items-center border border-gray-200 rounded-xl p-4">
-              <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class=" fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-              </div>
-              <h4 class="text-sm mr-2 w-9/10 text-left">Credit / Debit Card</h4>
+        <div class="flex items-center w-full justify-between">
+          <div class="flex flex-1 items-center gap-2 flex-col">
+            <div class="h-10 w-10 flex justify-center items-center text-white bg-[#f97316] rounded-full">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class=" h-5 w-5 text-gray-400" aria-hidden="true">
+                class="lucide lucide-truck h-5 w-5" aria-hidden="true">
+                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                <path d="M15 18H9"></path>
+                <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                <circle cx="17" cy="18" r="2"></circle>
+                <circle cx="7" cy="18" r="2"></circle>
+              </svg>
+            </div>
+            <p class="text-xs text-[#f97316]">Shipping</p>
+          </div>
+          <div class="flex flex-1 items-center gap-2 flex-col">
+            <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-credit-card h-5 w-5" aria-hidden="true">
                 <rect width="20" height="14" x="2" y="5" rx="2"></rect>
                 <line x1="2" x2="22" y1="10" y2="10"></line>
               </svg>
-            </button>
-            <button id="online" class="flex items-center border border-gray-200 rounded-xl p-4">
-              <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
-                <circle cx="12" cy="12" r="10"></circle>
-              </svg> -->
-              </div>
-              <h4 class="text-sm mr-2 w-6/10 text-left">UPI Payment</h4>
-              <p class="text-sm text-gray-400 h-5">GPay, PhonePe, Paytm</p>
-            </button>
-            <button id="cash" class="flex items-center border border-gray-200 rounded-xl p-4">
-              <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
-                <circle cx="12" cy="12" r="10"></circle>
-              </svg> -->
-              </div>
-              <h4 class="text-sm w-63/100 text-left">Cash on Delivery</h4>
-              <p class="text-sm text-gray-400 h-5">Pay when you receive</p>
-            </button>
-
-            <!-- for Card Input -->
-            <div class="cardInput pt-4 space-y-4 hidden">
-              <div class="flex flex-col w-full h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="cardNumber">Card Number *</label>
-                <input type="text" id="cardNumber" required placeholder="e.g., 7467 8736 7384 9375"
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-
-              <div class="flex flex-col w-full h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="cardholderName">Cardholder Name *</label>
-                <input type="text" id="cardholderName" required placeholder="Name on Card"
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
-              <div class="flex items-center w-full h-auto gap-4">
-                <div class="flex flex-col w-1/2 h-auto">
-                  <label class="flex items-start w-fit text-sm font-medium" for="expiryDate">Expiry Date *</label>
-                  <input type="text" required id="expiryDate" placeholder="MM/YY"
-                    class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-                </div>
-                <div class="flex flex-col w-1/2 h-auto">
-                  <label class="flex items-start w-fit text-sm font-medium" for="cvv">CVV *</label>
-                  <input type="text" id="cvv" placeholder="e.g., 976" required
-                    class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-                </div>
-              </div>
             </div>
-
-            <!-- for UPI input -->
-            <div class="cardInput pt-4 space-y-4">
-              <div class="flex flex-col w-full h-auto">
-                <label class="flex items-start w-fit text-sm font-medium" for="upiID">UPI ID *</label>
-                <input type="text" id="upiID" required placeholder="yourname@upi"
-                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
-              </div>
+            <p class="text-xs text-gray-400">Payment</p>
+          </div>
+          <div class="flex flex-1 items-center gap-2 flex-col">
+            <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-package h-5 w-5" aria-hidden="true">
+                <path
+                  d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z">
+                </path>
+                <path d="M12 22V12"></path>
+                <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                <path d="m7.5 4.27 9 5.15"></path>
+              </svg>
             </div>
+            <p class="text-xs text-gray-400">Review</p>
           </div>
-        </div>
-
-        <!-- payment section ends Here -->
-        <div class="border h-0 w-full border-gray-200"></div>
-        <!-- total summation -->
-        <div class="pt-4 w-full flex justify-between items-center">
-          <button
-            class="flex items-center justify-center h-9 w-1/6 hover:bg-gray-100 bg-white border border-gray-300 rounded-lg text-[#111111] font-medium transition-colors duration-200 ease-in-out hidden">
-            Back
-          </button>
-          <div class="flex flex-col gap-0">
-            <p class="text-sm text-gray-500">Total Amount</p>
-            <h3 class="text-xl text-[#111111] flex justify-end items-center font-medium">₹190</h3>
+          <div class="flex flex-1 items-center gap-2 flex-col">
+            <div class="h-10 w-10 flex justify-center items-center text-gray-400 bg-gray-200 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-circle-check-big h-5 w-5" aria-hidden="true">
+                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                <path d="m9 11 3 3L22 4"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-400">Complete</p>
           </div>
-          <button
-            class="checkout h-9 w-1/3 rounded-lg bg-[#f97316] text-white font-medium hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
-            Continue
-          </button>
         </div>
       </div>
+      <div class="border h-0 w-full border-gray-200"></div>
+      <!-- address input -->
+      <div class="py-4 overflow-y-auto custom-scroll hidden">
+        <div class="flex flex-col w-full h-auto gap-3">
+          <h3 class="text-lg text-[#111111]">Shipping Information</h3>
+          <!-- name input -->
+          <div class="flex flex-col w-full h-auto">
+            <label class="flex items-start w-fit text-sm font-medium" for="name">Full Name *</label>
+            <input type="text" id="name" required placeholder="RadheShyam"
+              class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+          </div>
+          <!-- email and phone input -->
+          <div class="flex items-center w-full h-auto gap-4">
+            <div class="flex flex-col w-1/2 h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="email">Email *</label>
+              <input type="text" required id="email" placeholder="RadheShyam@gmail.com"
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+            <div class="flex flex-col w-1/2 h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="phone">Phone No. *</label>
+              <input type="text" id="phone" placeholder="99711XXXXX" required
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+          </div>
+          <!-- address input  -->
+          <div class="flex flex-col w-full h-auto">
+            <label class="flex items-start w-fit text-sm font-medium" for="address">Address *</label>
+            <input type="text" id="address" required placeholder="Locality Address"
+              class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+          </div>
+          <!-- city and state Input -->
+          <div class="flex items-center w-full h-auto gap-4">
+            <div class="flex flex-col w-1/2 h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="city">City *</label>
+              <input type="text" required id="city" placeholder="New Delhi"
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+            <div class="flex flex-col w-1/2 h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="state">State *</label>
+              <input type="text" id="state" placeholder="NCT of Delhi" required
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- shipping section ends Here -->
+      <!-- payment section starts Here -->
+      <div class="py-4 overflow-y-auto custom-scroll">
+        <div class="flex flex-col w-full h-auto gap-3">
+          <h3 class="text-lg text-[#111111]">Payment Method</h3>
+          <button id="card" class="flex items-center border border-gray-200 rounded-xl p-4">
+            <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class=" fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+            </div>
+            <h4 class="text-sm mr-2 w-9/10 text-left">Credit / Debit Card</h4>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class=" h-5 w-5 text-gray-400" aria-hidden="true">
+              <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+              <line x1="2" x2="22" y1="10" y2="10"></line>
+            </svg>
+          </button>
+          <button id="online" class="flex items-center border border-gray-200 rounded-xl p-4">
+            <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg> -->
+            </div>
+            <h4 class="text-sm mr-2 w-6/10 text-left">UPI Payment</h4>
+            <p class="text-sm text-gray-400 h-5">GPay, PhonePe, Paytm</p>
+          </button>
+          <button id="cash" class="flex items-center border border-gray-200 rounded-xl p-4">
+            <div class="size-4 relative flex items-center justify-center mr-2 shadow-sm rounded-full">
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="fill-black absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg> -->
+            </div>
+            <h4 class="text-sm w-63/100 text-left">Cash on Delivery</h4>
+            <p class="text-sm text-gray-400 h-5">Pay when you receive</p>
+          </button>
+
+          <!-- for Card Input -->
+          <div class="cardInput pt-4 space-y-4 hidden">
+            <div class="flex flex-col w-full h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="cardNumber">Card Number *</label>
+              <input type="text" id="cardNumber" required placeholder="e.g., 7467 8736 7384 9375"
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+
+            <div class="flex flex-col w-full h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="cardholderName">Cardholder Name *</label>
+              <input type="text" id="cardholderName" required placeholder="Name on Card"
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+            <div class="flex items-center w-full h-auto gap-4">
+              <div class="flex flex-col w-1/2 h-auto">
+                <label class="flex items-start w-fit text-sm font-medium" for="expiryDate">Expiry Date *</label>
+                <input type="text" required id="expiryDate" placeholder="MM/YY"
+                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+              </div>
+              <div class="flex flex-col w-1/2 h-auto">
+                <label class="flex items-start w-fit text-sm font-medium" for="cvv">CVV *</label>
+                <input type="text" id="cvv" placeholder="e.g., 976" required
+                  class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+              </div>
+            </div>
+          </div>
+
+          <!-- for UPI input -->
+          <div class="cardInput pt-4 space-y-4">
+            <div class="flex flex-col w-full h-auto">
+              <label class="flex items-start w-fit text-sm font-medium" for="upiID">UPI ID *</label>
+              <input type="text" id="upiID" required placeholder="yourname@upi"
+                class="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- payment section ends Here -->
+      <div class="border h-0 w-full border-gray-200"></div>
+      <!-- total summation -->
+      <div class="pt-4 w-full flex justify-between items-center">
+        <button
+          class="flex items-center justify-center h-9 w-1/6 hover:bg-gray-100 bg-white border border-gray-300 rounded-lg text-[#111111] font-medium transition-colors duration-200 ease-in-out hidden">
+          Back
+        </button>
+        <div class="flex flex-col gap-0">
+          <p class="text-sm text-gray-500" id="itemSubTitle">Total Amount</p>
+          <h3 class="text-xl text-[#111111] flex justify-end items-center font-medium">₹190</h3>
+        </div>
+        <button
+          class="checkout h-9 w-1/3 rounded-lg bg-[#f97316] text-white font-medium hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
+          Continue
+        </button>
+      </div>
     </div>
+  </div>
 
 
 
-    <script src="sutra.js"></script>
+  <script src="sutra.js"></script>
 </body>
 
 </html>
