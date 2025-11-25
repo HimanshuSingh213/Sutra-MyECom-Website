@@ -1,4 +1,4 @@
-import { useCart } from "./context/CartContext";
+import { useCart } from "../context/CartContext";
 
 export default function CartModal({ open, onClose }) {
   const { cartItems, increaseQty, decreaseQty, removeFromCart, subtotal } = useCart();
@@ -12,7 +12,7 @@ export default function CartModal({ open, onClose }) {
     >
       <div
         className="absolute right-0 top-0 h-full w-[560px] bg-white shadow-xl transition-all p-6 flex flex-col"
-        onClick={(e) => e.stopPropagation()} // prevents closing when clicking inside
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex justify-between items-center border-b pb-4">
