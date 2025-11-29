@@ -1,0 +1,101 @@
+const mongoose = require("mongoose");
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    next();
+});
+
+mongoose.connect(
+    "mongodb+srv://himanshu_db_user:Sutra2025@sutra-ecom.ioe0daw.mongodb.net/SutraDB?appName=Sutra-Ecom"
+)
+    .then(() => console.log("MongoDB Atlas Connected"))
+    .catch(err => console.log(err));
+
+const productSchema = new mongoose.Schema({
+    title: String,
+    subtitle: String,
+    price: Number,
+    poster: String
+
+},
+    { timestamps: true },
+);
+
+const Product = mongoose.model("Product", productSchema, "Products");
+
+
+// Admin Key
+const Admin_Key = "ufmNNDeSqEkXnZK";
+
+const requireAdmin = (req, res, next) => {
+    const key = req.headers["admin-key"];
+
+    if (key !== Admin_Key) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    next();
+};
+
+app.get("/", async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.json(products);
+
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+app.post("/api/products", requireAdmin, async (req, res) => {
+    try {
+        const product = new Product(req.body);
+        await product.save();
+
+        res.status(201).json(product);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to create product" });
+    }
+});
+
+app.put("/api/products:id", requireAdmin, async (req, res) => {
+    try {
+        const updated = await Product.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+
+        res.json(updated);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Update failed" });
+    }
+});
+
+app.delete("/api/products:id", requireAdmin, async (req, res) => {
+    try {
+        await Product.findByIdAndDelete(req.params.id);
+        res.json({ message: "Product deleted" });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Delete failed" });
+    }
+})
+
+app.listen(5000, () => {
+    console.log("Backend running at http://localhost:5000");
+});

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CartModal2 from "./components/CartModal2";
-import { posters } from "./data/poster";
 import ProductCard from "./components/ProductCards";
 import { useCart } from "./context/CartContext";
+import AdminSection from "./components/AdminAuth";
+import AccessCRUD from "./components/AccessCRUD";
 
 export default function App() {
 
@@ -13,6 +14,47 @@ export default function App() {
     });
 
   }, [])
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/");
+        if (!res.ok) throw new Error("API fetch failed");
+
+        const finalData = await res.json();
+        setProducts(finalData);
+      }
+      catch (err) {
+        setError(err.message);
+      }
+      finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const [adminKey, setAdminKey] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
+
+  const unlockAdmin = () => {
+    if (adminKey === "ufmNNDeSqEkXnZK") {
+      setIsAdmin(true);
+      setAdminModalOpen(false);
+      setIsAccessingCRUD(true);
+    } 
+    else {
+      alert("Invalid Admin Key");
+    }
+  };  
+
+  const [isAccessingCRUD, setIsAccessingCRUD] = useState(false);
 
   // Checkout state
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -98,8 +140,8 @@ export default function App() {
       <div className="w-full bg-[#ffffffcc] fixed top-0 border-b border-b-gray-100 z-50 backdrop-blur-sm">
         <div className="flex justify-between px-5 py-3 max-w-[90vw] items-center box-border mx-auto my-0">
           {/* Logo */}
-          <div 
-          className="logo flex items-center justify-center">
+          <div
+            className="logo flex items-center justify-center">
             <svg
               onClick={() => window.scrollTo({
                 top: 0,
@@ -278,17 +320,18 @@ export default function App() {
               </p>
             </div>
 
-            <div className="px-4 py-10 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            <div className="px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-8">
 
-              {posters.map((item) => (
+              {products.map((item) => (
                 <ProductCard
-                  key={item.title}
+                  key={item._id}
                   title={item.title}
                   subtitle={item.subtitle}
                   price={item.price}
                   poster={item.poster}
                 />
               ))}
+
 
             </div>
           </div>
@@ -329,6 +372,12 @@ export default function App() {
           >
             Contact
           </a>
+          <span className="text-gray-300 cursor-default">·</span>
+          <div onClick={() => isAdmin ? null : setAdminModalOpen(true)}
+            className={`${isAdmin ? "text-[#f97316]" : "text-gray-400"} flex gap-1 justify-center items-center hover:text-[#f97316] text-sm transition-all duration-200 ease-in-out font-medium cursor-pointer`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 
+            {isAdmin ? "Admin Active" : "Admin Access"}
+          </div>
         </div>
         <div className="flex gap-4 pb-8 items-center justify-center w-full border-b border-b-gray-200">
           <button className="border border-gray-200 cursor-pointer bg-white rounded-full h-9 w-9 flex items-center justify-center transition-all duration-200 ease-in-out hover:text-[#f97316] hover:border-[#f97316]">
@@ -394,12 +443,26 @@ export default function App() {
           © 2025 SUTRA. All rights reserved.
         </div>
 
+        <div className="p-3 text-gray-500 font-medium text-sm">Made with ❤️ by Himanshu Singh Dangi</div>
+
         {/* Manual Button for testing checkout section */}
         <button
           onClick={() => setCheckoutOpen(true)}
           className="mt-6 px-6 py-2 rounded-lg bg-[#f97316] text-white text-sm hover:bg-[#ea580c]"
         >
           Test Checkout Modal
+        </button>
+        <button
+          onClick={() => setAdminModalOpen(true)}
+          className="mt-6 px-6 py-2 rounded-lg bg-[#f97316] text-white text-sm hover:bg-[#ea580c]"
+        >
+          Test Admin Modal
+        </button>
+        <button
+          onClick={() => setIsAccessingCRUD(true)}
+          className="mt-6 px-6 py-2 rounded-lg bg-[#f97316] text-white text-sm hover:bg-[#ea580c]"
+        >
+          Test CRUD Modal
         </button>
 
       </footer>
@@ -750,6 +813,22 @@ export default function App() {
 
       {/* Cart Modal */}
       <CartModal2 open={cartOpen} onClose={() => setCartOpen(false)} />
+
+      {/* Admin Login Modal */}
+      <AdminSection 
+        isOpen={adminModalOpen} 
+        onClose={() => setAdminModalOpen(false)}
+        adminKey={adminKey}
+        setAdminKey={setAdminKey}
+        onLogin={unlockAdmin}
+      />
+
+      {/* Admin CRUD Operation Modal */}
+      <AccessCRUD
+      isOpen={isAccessingCRUD}
+      onClose={() => {setIsAccessingCRUD(false)}}
+      />
+
     </div >
   )
 }

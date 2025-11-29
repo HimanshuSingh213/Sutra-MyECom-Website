@@ -53,7 +53,7 @@ export default function CartModal2({ open, onClose }) {
                             <p className="text-sm text-gray-500" id="itemSubTitle">Add some beautiful Sanskrit posters to get started!</p>
                         </div>
                         <div onClick={onClose}
-                         id="continueShopping"
+                            id="continueShopping"
                             className="h-9 py-2 px-4 mt-4 border border-gray-200 text-sm rounded-md flex justify-center items-center font-semibold hover:bg-gray-200 transition-colors duration-200 ease-in-out cursor-default">
                             Continue Shopping
                         </div>
@@ -140,7 +140,8 @@ export default function CartModal2({ open, onClose }) {
                                 </div>
                                 <div className="shipping flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
                                     <div className="key text-gray-600">Shipping</div>
-                                    <div className="value">₹61</div>
+                                    <div
+                                        className={`value ${subtotal >= 350 ? "text-green-600 font-medium" : ""}`}>{subtotal >= 350 ? "Free" : "₹61"}</div>
                                 </div>
                                 <div className="gst flex items-center justify-between mb-2 h-5 text-sm text-[#111111]">
                                     <div className="key text-gray-600">GST(18%)</div>
@@ -149,7 +150,10 @@ export default function CartModal2({ open, onClose }) {
                                 <div
                                     className="total flex items-center justify-between mb-2 text-lg pt-3 border-t border-t-gray-300 mt-2 text-[#111111]">
                                     <div className="key text-gray-600">Total</div>
-                                    <div id="total" className="value text-2xl">₹{Math.round(subtotal * 1.18 + 61)}</div>
+                                    <div id="total" className="value text-2xl">
+                                        ₹{Math.round(subtotal * 1.18 + (subtotal >= 350 ? 0 : 61))}
+                                    </div>
+
                                 </div>
                             </div>
                             <div className="bottom">
@@ -157,7 +161,7 @@ export default function CartModal2({ open, onClose }) {
                                     className="checkout h-12 w-full rounded-xl bg-[#f97316] text-white font-medium mb-4 hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                                     Proceed to Checkout
                                 </button>
-                                <p className="text-xs text-gray-500 text-center">Secure checkout • Free shipping on orders over ₹350</p>
+                                <p className="text-xs text-gray-500 text-center">Secure checkout • Free shipping on orders over ₹349</p>
                             </div>
                         </div>
                     )}
