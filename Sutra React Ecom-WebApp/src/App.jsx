@@ -7,6 +7,8 @@ import AccessCRUD from "./components/AccessCRUD";
 
 export default function App() {
 
+  const [isProductEditOpen, setProductEditOpen] = useState(false);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -15,45 +17,43 @@ export default function App() {
 
   }, [])
 
+  // product states from Database
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}`);
         if (!res.ok) throw new Error("API fetch failed");
 
         const finalData = await res.json();
         setProducts(finalData);
       }
       catch (err) {
-        setError(err.message);
-      }
-      finally {
-        setLoading(false);
+        console.log(err)
       }
     };
 
     fetchProducts();
   }, []);
 
+  // Admin Modal states
   const [adminKey, setAdminKey] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
 
   const unlockAdmin = () => {
-    if (adminKey === "ufmNNDeSqEkXnZK") {
+    if (adminKey === import.meta.env.VITE_ADMIN_KEY) {
       setIsAdmin(true);
       setAdminModalOpen(false);
       setIsAccessingCRUD(true);
-    } 
+    }
     else {
       alert("Invalid Admin Key");
     }
-  };  
+  };
 
+  // Crud Section state
   const [isAccessingCRUD, setIsAccessingCRUD] = useState(false);
 
   // Checkout state
@@ -61,7 +61,7 @@ export default function App() {
   const [checkoutStep, setCheckoutStep] = useState(1);
   const [cartOpen, setCartOpen] = useState(false);
 
-  const { totalItems } = useCart();
+  const { cartItems, subtotal, totalItems } = useCart();
 
   // Shipping form state
   const [shippingInfo, setShippingInfo] = useState({
@@ -82,12 +82,6 @@ export default function App() {
     cvv: "",
   });
   const [upiId, setUpiId] = useState("");
-
-  // Fake order summary (for now you can change these)
-  const subtotal = 129 * 2; // change later when cart logic is added
-  const shippingCost = 59;
-  const gst = Math.round(subtotal * 0.18);
-  const total = subtotal + shippingCost + gst;
 
   // STEP NAV HELPERS
   const goNext = () => {
@@ -110,13 +104,12 @@ export default function App() {
           alert("Please fill all card details.");
           return;
         }
-      } else if (paymentMethod === "upi") {
+      }
+      else if (paymentMethod === "upi") {
         if (!upiId) {
           alert("Please enter your UPI ID.");
           return;
         }
-      } else if (paymentMethod === "cash") {
-        // optional: require nothing
       }
     }
 
@@ -132,7 +125,23 @@ export default function App() {
     setCheckoutStep(1);
   };
 
+  useEffect(() => {
+    if (checkoutOpen || adminModalOpen || isAccessingCRUD || cartOpen || isProductEditOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [checkoutOpen, adminModalOpen, isAccessingCRUD, cartOpen, isProductEditOpen]);
 
+  const getStepClasses = (step) => {
+    if (checkoutStep > step) {
+      return "bg-green-500 text-white";
+    }
+    if (checkoutStep === step) {
+      return "bg-[#f97316] text-white";
+    }
+    return "bg-gray-200 text-gray-400";
+  };
 
   return (
     <div className="cursor-default bg-white">
@@ -375,7 +384,7 @@ export default function App() {
           <span className="text-gray-300 cursor-default">·</span>
           <div onClick={() => isAdmin ? null : setAdminModalOpen(true)}
             className={`${isAdmin ? "text-[#f97316]" : "text-gray-400"} flex gap-1 justify-center items-center hover:text-[#f97316] text-sm transition-all duration-200 ease-in-out font-medium cursor-pointer`}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             {isAdmin ? "Admin Active" : "Admin Access"}
           </div>
         </div>
@@ -471,7 +480,7 @@ export default function App() {
       {
         checkoutOpen && (
           <div className="fixed top-0 left-0 w-full h-full z-1000 backdrop-brightness-55">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 max-h-[90vh] shadow-lg flex flex-col gap-4 w-full overflow-y-auto max-w-2xl sm:max-w-lg rounded-xl">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 h-[90vh] shadow-lg flex flex-col gap-4 w-full overflow-y-auto max-w-2xl sm:max-w-lg rounded-xl">
 
               {/* Header */}
               <div className="flex justify-between items-center">
@@ -495,7 +504,7 @@ export default function App() {
                 <div className="w-full">
                   <div className="line mb-4 w-full overflow-hidden rounded-full h-2 bg-[#03021333]">
                     <div
-                      className={`h-2 w-full bg-[#030213] transition-transform duration-500`}
+                      className={`h-2 w-full bg-[#030213] transition-transform duration-400 ease-in-out`}
                       style={{
                         transform: `translateX(-${100 - checkoutStep * 25}%)`
                       }}
@@ -504,7 +513,7 @@ export default function App() {
                   {/* Step 1 */}
                   <div className="flex items-center w-full justify-between">
                     <div className="flex flex-1 items-center gap-2 flex-col">
-                      <div className={`h-10 w-10 flex justify-center items-center text-white bg-[#f97316] rounded-full ${checkoutStep === 1 ? "text-[#f97316]" : "text-gray-400"}`}>
+                      <div className={`h-10 w-10 flex justify-center items-center rounded-full ${getStepClasses(1)}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                           className="lucide lucide-truck h-5 w-5" aria-hidden="true">
@@ -520,8 +529,7 @@ export default function App() {
 
                     {/* Step 2 */}
                     <div className="flex flex-1 items-center gap-2 flex-col">
-                      <div className={`h-10 w-10 flex justify-center items-center rounded-full
-                        ${checkoutStep === 2 ? "text-white bg-[#f97316]" : "text-gray-400 bg-gray-200"}
+                      <div className={`h-10 w-10 flex justify-center items-center rounded-full ${getStepClasses(2)}
                         `}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -536,8 +544,7 @@ export default function App() {
 
                     {/* Step 3 */}
                     <div className="flex flex-1 items-center gap-2 flex-col">
-                      <div className={`h-10 w-10 flex justify-center items-center rounded-full
-                        ${checkoutStep === 3 ? "text-white bg-[#f97316]" : "text-gray-400 bg-gray-200"}
+                      <div className={`h-10 w-10 flex justify-center items-center rounded-full ${getStepClasses(3)}
                         `}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -555,8 +562,7 @@ export default function App() {
 
                     {/* Step 4 */}
                     <div className="flex flex-1 items-center gap-2 flex-col">
-                      <div className={`h-10 w-10 flex justify-center items-center rounded-full
-                        ${checkoutStep === 4 ? "text-white bg-[#f97316]" : "text-gray-400 bg-gray-200"}
+                      <div className={`h-10 w-10 flex justify-center items-center rounded-full ${getStepClasses(4)}
                         `}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -584,7 +590,7 @@ export default function App() {
 
                     {/* Name Input */}
                     <div className="flex flex-col w-full h-auto">
-                      <label className="flex items-start w-fit text-sm font-medium" for="name">Full Name *</label>
+                      <label className="flex items-start w-fit text-sm font-medium" htmlFor="name">Full Name *</label>
                       <input
                         type="text" id="name" required placeholder="RadheShyam"
                         className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
@@ -596,7 +602,7 @@ export default function App() {
                     {/* Email and Phone no. Input*/}
                     <div className="flex items-center w-full h-auto gap-4">
                       <div className="flex flex-col w-1/2 h-auto">
-                        <label className="flex items-start w-fit text-sm font-medium" for="email">Email *</label>
+                        <label className="flex items-start w-fit text-sm font-medium" htmlFor="email">Email *</label>
                         <input type="text" required id="email" placeholder="RadheShyam@gmail.com"
                           className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                           value={shippingInfo.email}
@@ -604,7 +610,7 @@ export default function App() {
                         />
                       </div>
                       <div className="flex flex-col w-1/2 h-auto">
-                        <label className="flex items-start w-fit text-sm font-medium" for="phone">Phone No. *</label>
+                        <label className="flex items-start w-fit text-sm font-medium" htmlFor="phone">Phone No. *</label>
                         <input type="text" id="phone" placeholder="99711XXXXX" required
                           className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                           value={shippingInfo.phone}
@@ -615,7 +621,7 @@ export default function App() {
 
                     {/* Address Input */}
                     <div className="flex flex-col w-full h-auto">
-                      <label className="flex items-start w-fit text-sm font-medium" for="address">Address *</label>
+                      <label className="flex items-start w-fit text-sm font-medium" htmlFor="address">Address *</label>
                       <input type="text" id="address" required placeholder="Locality Address"
                         className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                         value={shippingInfo.address}
@@ -626,7 +632,7 @@ export default function App() {
                     {/* City and State Input */}
                     <div className="flex items-center w-full h-auto gap-4">
                       <div className="flex flex-col w-1/2 h-auto">
-                        <label className="flex items-start w-fit text-sm font-medium" for="city">City *</label>
+                        <label className="flex items-start w-fit text-sm font-medium" htmlFor="city">City *</label>
                         <input type="text" required id="city" placeholder="New Delhi"
                           className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                           value={shippingInfo.city}
@@ -634,7 +640,7 @@ export default function App() {
                         />
                       </div>
                       <div className="flex flex-col w-1/2 h-auto">
-                        <label className="flex items-start w-fit text-sm font-medium" for="state">State *</label>
+                        <label className="flex items-start w-fit text-sm font-medium" htmlFor="state">State *</label>
                         <input type="text" id="state" placeholder="NCT of Delhi" required
                           className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                           value={shippingInfo.state}
@@ -709,7 +715,7 @@ export default function App() {
                       {paymentMethod === "card" && (
                         <div className="cardInput pt-4 space-y-4">
                           <div className="flex flex-col w-full h-auto">
-                            <label className="flex items-start w-fit text-sm font-medium" for="cardNumber">Card Number *</label>
+                            <label className="flex items-start w-fit text-sm font-medium" htmlFor="cardNumber">Card Number *</label>
                             <input type="text" id="cardNumber" required placeholder="e.g., 7467 8736 7384 9375"
                               className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                               value={cardInfo.number}
@@ -720,7 +726,7 @@ export default function App() {
                           </div>
 
                           <div className="flex flex-col w-full h-auto">
-                            <label className="flex items-start w-fit text-sm font-medium" for="cardholderName">Cardholder Name *</label>
+                            <label className="flex items-start w-fit text-sm font-medium" htmlFor="cardholderName">Cardholder Name *</label>
                             <input type="text" id="cardholderName" required placeholder="Name on Card"
                               className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                               value={cardInfo.name}
@@ -732,7 +738,7 @@ export default function App() {
 
                           <div className="flex items-center w-full h-auto gap-4">
                             <div className="flex flex-col w-1/2 h-auto">
-                              <label className="flex items-start w-fit text-sm font-medium" for="expiryDate">Expiry Date *</label>
+                              <label className="flex items-start w-fit text-sm font-medium" htmlFor="expiryDate">Expiry Date *</label>
                               <input type="text" required id="expiryDate" placeholder="MM/YY"
                                 className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                                 value={cardInfo.expiry}
@@ -743,7 +749,7 @@ export default function App() {
                             </div>
 
                             <div className="flex flex-col w-1/2 h-auto">
-                              <label className="flex items-start w-fit text-sm font-medium" for="cvv">CVV *</label>
+                              <label className="flex items-start w-fit text-sm font-medium" htmlFor="cvv">CVV *</label>
                               <input type="text" id="cvv" placeholder="e.g., 976" required
                                 className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0"
                                 value={cardInfo.cvv}
@@ -761,7 +767,7 @@ export default function App() {
                       {paymentMethod === "upi" && (
                         <div className="UpiIdInput pt-4 space-y-4">
                           <div className="flex flex-col w-full h-auto">
-                            <label className="flex items-start w-fit text-sm font-medium" for="upiID">UPI ID *</label>
+                            <label className="flex items-start w-fit text-sm font-medium" htmlFor="upiID">UPI ID *</label>
                             <input type="text" id="upiID" required placeholder="yourname@upi"
                               className="mt-1 px-3 py-1 bg-gray-100 rounded-lg text-sm placeholder:text-sm h-9 w-full focus:border-2 focus:border-gray-400 transition-all duration-150 ease-in-out outline-0" />
                             <p className="text-xs text-gray-500">
@@ -785,20 +791,96 @@ export default function App() {
                 )}
 
                 {/* STEP 3 UI */}
+                {checkoutStep === 3 && (
+                  <div className="py-4 w-full pr-2">
+                    <header className="w-full mb-4 text-lg text-left">Order Summary</header>
+
+                    {/* Cart Review */}
+                    {cartItems.map((item, i) => (
+
+                      <div key={i}
+                        className="flex gap-2 items-center mb-3 border rounded-lg border-gray-200 p-1">
+                        <div className="w-16 h-20 m-1 bg-gray-100 rounded-md overflow-hidden flex items-center justify-center">
+                          <img
+                            src={item.poster ? item.poster : "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg=="} 
+                            alt={item.poster} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="w-72/100 flex flex-col items-start">
+                          <h4 className="text-sm">{item.title}</h4>
+                          <p className="text-xs text-gray-500">{item.subtitle}</p>
+                          <p className="text-xs text-gray-500">Qty: {item.qty}</p>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <p className="text-sm">₹{item.price * item.qty}</p>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="border h-0 w-full border-gray-200 mb-6"></div>
+                    {/* Shipping Address */}
+                    <div>
+                      <h2 className="text-lg text-[#111] mb-2 text-left">Shipping Address</h2>
+                      <div className="text-gray-600 text-sm space-y-1 text-left mb-4">
+                        <p>{shippingInfo.name}</p>
+                        <p>{shippingInfo.address}</p>
+                        <p>{shippingInfo.city}, {shippingInfo.state}</p>
+                        <p>{shippingInfo.email}</p>
+                        <p>{shippingInfo.phone}</p>
+
+                      </div>
+                    </div>
+                    <div className="border h-0 w-full border-gray-200 mb-6"></div>
+
+                    {/* Payment Method Choosen */}
+                    <div className="mb-6">
+                      <h3 className="text-lg text-[#111] mb-2">Payment Method</h3>
+                      <p className="text-sm text-gray-600 capitalize">{paymentMethod === "upi"
+                        ? "UPI Payment"
+                        : paymentMethod === "card"
+                          ? "Credit / Debit Card"
+                          : "Cash on Delivery"}</p>
+                    </div>
+                    <div className="border h-0 w-full border-gray-200 mb-6"></div>
+
+                    {/* Total Calculations */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-sm mb-2">
+                        <p>Subtotal</p>
+                        <p>₹{subtotal}</p>
+                      </div>
+                      <div className="flex items-center justify-between text-sm mb-2">
+                        <p>Shipping</p>
+                        <p className={`value ${subtotal >= 350 ? "text-green-600 font-medium" : ""}`}>{subtotal >= 350 ? "Free" : "₹61"}</p>
+                      </div>
+                      <div className="flex items-center justify-between text-sm mb-2">
+                        <p>GST(18%)</p>
+                        <p>₹{(subtotal * 0.18).toFixed(2)}</p>
+                      </div>
+                      <div className="border h-0 w-full border-gray-200 mb-2"></div>
+                      <div className="flex items-center justify-between text-lg">
+                        <p>Total</p>
+                        <p>₹{Math.round(subtotal * 1.18 + (subtotal >= 350 ? 0 : 61))}</p>
+                      </div>
+                    </div>
+
+
+                  </div>
+                )}
 
               </div>
 
               <div className="border h-0 w-full border-gray-200"></div>
               {/* Footer Buttons */}
               {checkoutStep < 4 && (
-                <div className="pt-4 w-full flex justify-between items-center">
+                <div className="pt-4 w-full flex justify-between items-center sticky bottom-0">
                   <button onClick={goBack}
                     className={`${checkoutStep > 1 ? "flex" : "hidden"} items-center justify-center h-9 w-1/6 hover:bg-gray-100 bg-white border border-gray-300 rounded-lg text-[#111111] font-medium transition-colors duration-200 ease-in-out `}>
                     Back
                   </button>
                   <div className="flex flex-col gap-0">
                     <p className="text-sm text-gray-500" id="itemSubTitle">Total Amount</p>
-                    <h3 className="text-xl text-[#111111] flex justify-end items-center font-medium">₹190</h3>
+                    <h3 className="text-xl text-[#111111] flex justify-end items-center font-medium">₹{Math.round(subtotal * 1.18 + (subtotal >= 350 ? 0 : 61))}</h3>
                   </div>
                   <button onClick={goNext}
                     className="checkout h-9 w-1/3 rounded-lg bg-[#f97316] text-white font-medium hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
@@ -815,19 +897,24 @@ export default function App() {
       <CartModal2 open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {/* Admin Login Modal */}
-      <AdminSection 
-        isOpen={adminModalOpen} 
-        onClose={() => setAdminModalOpen(false)}
+      <AdminSection
+        isOpen={adminModalOpen}
+        onClose={() => { setAdminModalOpen(false), setIsAdmin(null) }}
         adminKey={adminKey}
         setAdminKey={setAdminKey}
-        onLogin={unlockAdmin}
+        onLogin={() => { unlockAdmin(), setAdminKey("") }}
       />
 
       {/* Admin CRUD Operation Modal */}
       <AccessCRUD
-      isOpen={isAccessingCRUD}
-      onClose={() => {setIsAccessingCRUD(false)}}
+        isOpen={isAccessingCRUD}
+        onClose={() => { setIsAccessingCRUD(false), setIsAdmin(null) }}
+        products={products}
+        setProducts={setProducts}
+        isProductEditOpen={isProductEditOpen}
+        setProductEditOpen={setProductEditOpen}
       />
+
 
     </div >
   )

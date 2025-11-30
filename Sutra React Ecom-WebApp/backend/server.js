@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -12,9 +13,7 @@ app.use((req, res, next) => {
     next();
 });
 
-mongoose.connect(
-    "mongodb+srv://himanshu_db_user:Sutra2025@sutra-ecom.ioe0daw.mongodb.net/SutraDB?appName=Sutra-Ecom"
-)
+mongoose.connect( process.env.MONGO_URI )
     .then(() => console.log("MongoDB Atlas Connected"))
     .catch(err => console.log(err));
 
@@ -32,7 +31,7 @@ const Product = mongoose.model("Product", productSchema, "Products");
 
 
 // Admin Key
-const Admin_Key = "ufmNNDeSqEkXnZK";
+const Admin_Key = process.env.ADMIN_KEY;
 
 const requireAdmin = (req, res, next) => {
     const key = req.headers["admin-key"];
@@ -46,13 +45,16 @@ const requireAdmin = (req, res, next) => {
 
 app.get("/", async (req, res) => {
     try {
+        console.log("Fetching products from database...");
         const products = await Product.find();
+        console.log(`Found ${products.length} products`);
         res.json(products);
 
     }
     catch (err) {
+        console.error("Error fetching products:");
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(500).json({ error: "Server error", details: err.message });
     }
 });
 
@@ -69,7 +71,7 @@ app.post("/api/products", requireAdmin, async (req, res) => {
     }
 });
 
-app.put("/api/products:id", requireAdmin, async (req, res) => {
+app.put("/api/products/:id", requireAdmin, async (req, res) => {
     try {
         const updated = await Product.findByIdAndUpdate(
             req.params.id,
@@ -85,7 +87,7 @@ app.put("/api/products:id", requireAdmin, async (req, res) => {
     }
 });
 
-app.delete("/api/products:id", requireAdmin, async (req, res) => {
+app.delete("/api/products/:id", requireAdmin, async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
         res.json({ message: "Product deleted" });
