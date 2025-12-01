@@ -5,7 +5,21 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
+const port = process.env.PORT || 3000;
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL || "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
+
+// for testing on mobile only 
+// app.use(cors({
+//     origin: "*",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"]
+//   }));
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -13,7 +27,7 @@ app.use((req, res, next) => {
     next();
 });
 
-mongoose.connect( process.env.MONGO_URI )
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Atlas Connected"))
     .catch(err => console.log(err));
 
@@ -49,6 +63,8 @@ app.get("/", async (req, res) => {
         const products = await Product.find();
         console.log(`Found ${products.length} products`);
         res.json(products);
+
+        if (products.length === 0) throw new Error("Server Side Issue!!!");
 
     }
     catch (err) {
@@ -98,6 +114,6 @@ app.delete("/api/products/:id", requireAdmin, async (req, res) => {
     }
 })
 
-app.listen(5000, () => {
-    console.log("Backend running at http://localhost:5000");
+app.listen(port, () => {
+    console.log(`Backend running at http://localhost:${port}`);
 });

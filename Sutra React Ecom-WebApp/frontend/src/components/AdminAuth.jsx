@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function AdminSection({ isOpen, onClose, adminKey, setAdminKey, onLogin }) {
     if (!isOpen) return null;
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleBack = () => {
+            onClose();
+        };
+
+        window.history.pushState({ modal: "AdminAuth" }, "");
+
+        window.addEventListener("popstate", handleBack);
+
+        return () => {
+            window.removeEventListener("popstate", handleBack);
+        };
+    }, [isOpen]);
 
     return (
         <div className='fixed inset-0 flex items-center justify-center z-50'>

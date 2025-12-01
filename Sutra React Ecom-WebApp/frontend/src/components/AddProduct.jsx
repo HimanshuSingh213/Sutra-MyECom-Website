@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Admin Key
 const ADMIN_KEY = import.meta.env.VITE_ADMIN_KEY;
@@ -13,13 +13,13 @@ function AddProduct({ isOpen, onClose, setProducts }) {
     const [price, setPrice] = useState("");
     const [poster, setPoster] = useState("");
 
-    const addProduct  = async (e) => {
+    const addProduct = async (e) => {
         e.preventDefault();
 
         const newProduct = { title, subtitle, price, poster };
 
         try {
-            const res = await fetch(fetch(`${import.meta.env.VITE_API_URL}/api/products`),
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`,
                 {
                     method: "POST",
                     headers: {
@@ -38,7 +38,7 @@ function AddProduct({ isOpen, onClose, setProducts }) {
             const finalData = await res.json();
 
             setProducts((products) =>
-            [ ...products, finalData]
+                [...products, finalData]
             );
 
             setTitle("");
@@ -54,20 +54,40 @@ function AddProduct({ isOpen, onClose, setProducts }) {
         }
     }
 
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleBack = (e) => {
+            // Close this modal and push state back to keep parent's history
+            onClose();
+            window.history.pushState({ modal: "AddProduct" }, "");
+        };
+
+        window.history.pushState({ modal: "AddProduct" }, "");
+
+        window.addEventListener("popstate", handleBack);
+
+        return () => {
+            window.removeEventListener("popstate", handleBack);
+        };
+    }, [isOpen, onClose]);
+
 
     return (
         <div className='fixed inset-0 flex items-center justify-center z-60'>
             <div
                 className='absolute inset-0 bg-black/50 backdrop-blur-sm'
-                onClick={onClose}
-
+                onClick={() => {
+                    if (window.innerWidth > 1024) {
+                        onClose();
+                    }
+                }}
             ></div>
-            <div className='relative bg-white rounded-xl w-4/10 overflow-hidden min-h-1/3'>
+            <div className='relative bg-white rounded-xl lg:w-4/10 w-85/100  overflow-hidden min-h-1/3'>
                 <div className='border-b border-b-gray-300 px-4 py-3 flex justify-between items-center'>
                     <p>Add Product</p>
                     <button
                         onClick={onClose}
-
                         className="text-gray-400 hover:bg-gray-100 p-1 rounded-md transition duration-50 ease-in-out"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -107,14 +127,14 @@ function AddProduct({ isOpen, onClose, setProducts }) {
                             <label className='text-xs h-4 mb-1.5'
                                 htmlFor="price">Price (₹)</label>
                             <input value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            className='px-3 py-2 border border-gray-300 rounded-lg size-full text-sm text-gray-800 placeholder:text-gray-400 focus:outline-2 focus:outline-[#f97316]'
+                                onChange={(e) => setPrice(e.target.value)}
+                                className='px-3 py-2 border border-gray-300 rounded-lg size-full text-sm text-gray-800 placeholder:text-gray-400 focus:outline-2 focus:outline-[#f97316]'
                                 type="text" id='price' placeholder='e.g., ₹159' required />
                         </div>
 
                         <div className='pt-2 flex gap-3 items-center'>
-                            <button 
-                            className='w-1/2 bg-[#f97316] text-white text-sm flex items-center justify-center rounded-xl py-3 px-4 hover:bg-[#ea580c] transition duration-100 ease-in-out'
+                            <button
+                                className='w-1/2 bg-[#f97316] text-white text-sm flex items-center justify-center rounded-xl py-3 px-4 hover:bg-[#ea580c] transition duration-100 ease-in-out'
                                 type="submit">Submit</button>
                             <button onClick={onClose}
                                 className='w-1/2 text-gray-600 border border-gray-300 text-sm flex items-center justify-center rounded-xl py-3 px-4 hover:bg-gray-50 transition duration-100 ease-in-out'

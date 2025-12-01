@@ -9,6 +9,9 @@ function ProductCard({
     price
 }) {
 
+    // added item to cart message 
+    const [added, setAdded] = useState(false);
+
     const [hover, setHover] = useState(false);
     const { addToCart } = useCart();
 
@@ -16,12 +19,13 @@ function ProductCard({
         <div
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            className={`flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg `}>
+            className={`flex flex-col gap-7 overflow-hidden rounded-2xl posters w-full bg-white transition-all duration-300 ease-in-out hover:shadow-lg shadow-md lg:shadow-none `}>
             <div className="h-[540px] overflow-hidden z-20 flex items-center justify-center w-full ">
                 <img
+                    loading="lazy"
                     src={poster}
                     alt={title}
-                    className={`transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center ${hover === true? "scale-105" : ""}`}
+                    className={`transition-all duration-400 ease-in-out overflow-hidden object-cover h-[540px] object-center ${hover === true ? "scale-105" : ""}`}
                 />
             </div>
             <div className="p-4">
@@ -36,13 +40,17 @@ function ProductCard({
                 <div className="flex justify-between py-2 items-center">
                     <div>₹{price}</div>
                     <div
-                        onClick={() => addToCart({ title, subtitle, price, poster })}
-                        className="rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
-                        Add to Cart
+                        onClick={() => {
+                            addToCart({ title, subtitle, price, poster })
+                            setAdded(true);
+                            setTimeout(() => setAdded(false), 800);
+                        }}
+                        className="rounded-2xl bg-[#f97316] px-6 h-8 text-sm text-white font-medium flex items-center justify-center hover:bg-[#ea580c] active:scale-95 transition-all duration-150 ease-in-out">
+                            {added ? "✓ Added" : "Add to Cart"}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -70,13 +70,36 @@ function ProductEdit({ isOpen, onClose, product, setProducts }) {
         }
     }
 
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleBack = (e) => {
+            // Close this modal and push state back to keep parent's history
+            onClose();
+            window.history.pushState({ modal: "ProductEdit" }, "");
+        };
+
+        window.history.pushState({ modal: "ProductEdit" }, "");
+
+        window.addEventListener("popstate", handleBack);
+
+        return () => {
+            window.removeEventListener("popstate", handleBack);
+        };
+    }, [isOpen, onClose]);
+
 
     return (
         <div className='fixed inset-0 flex items-center justify-center z-60'>
             <div
                 className='absolute inset-0 bg-black/50 backdrop-blur-xs'
+                onClick={() => {
+                    if (window.innerWidth > 1024) {
+                        onClose();
+                    }
+                }}
             ></div>
-            <div className='relative bg-white rounded-xl w-4/10 overflow-hidden min-h-1/3'>
+            <div className='relative bg-white rounded-xl lg:w-4/10 w-85/100 overflow-hidden min-h-1/3'>
                 <div className='border-b border-b-gray-300 px-4 py-3 flex justify-between items-center'>
                     <p>Edit Product</p>
                     <button
@@ -120,8 +143,8 @@ function ProductEdit({ isOpen, onClose, product, setProducts }) {
                             <label className='text-xs h-4 mb-1.5'
                                 htmlFor="price">Price (₹)</label>
                             <input value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            className='px-3 py-2 border border-gray-300 rounded-lg size-full text-sm text-gray-800 placeholder:text-gray-400 focus:outline-2 focus:outline-[#f97316]'
+                                onChange={(e) => setPrice(e.target.value)}
+                                className='px-3 py-2 border border-gray-300 rounded-lg size-full text-sm text-gray-800 placeholder:text-gray-400 focus:outline-2 focus:outline-[#f97316]'
                                 type="text" id='price' placeholder='e.g., ₹159' required />
                         </div>
 

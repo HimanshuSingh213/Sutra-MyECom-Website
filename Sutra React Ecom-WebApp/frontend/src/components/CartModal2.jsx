@@ -1,7 +1,25 @@
 import { useCart } from "../context/CartContext";
+import { useEffect } from "react";
 
-export default function CartModal2({ open, onClose }) {
+export default function CartModal2({ open, onClose, setCheckoutOpen }) {
     const { cartItems, increaseQty, decreaseQty, removeFromCart, subtotal } = useCart();
+
+    useEffect(() => {
+        if (!open) return;
+
+        const handleBack = () => {
+            onClose();
+        };
+
+        window.history.pushState({ modal: "cart" }, "");
+
+        window.addEventListener("popstate", handleBack);
+
+        return () => {
+            window.removeEventListener("popstate", handleBack);
+        };
+    }, [open]);
+
 
     return (
 
@@ -13,7 +31,7 @@ export default function CartModal2({ open, onClose }) {
             {/* cart Section goes Here */}
             <div
                 onClick={(e) => e.stopPropagation()}
-                id="cartSection" className={`absolute w-[576px] h-full bg-white transition-all duration-300 ease-out ${open ? "right-0" : "-right-[576px]"}`}>
+                id="cartSection" className={`absolute lg:w-[576px] w-screen h-full bg-white transition-all duration-300 ease-out ${open ? "right-0" : "-right-[576px]"}`}>
 
                 <header className="flex justify-start items-center w-full gap-2 border-b border-b-gray-100 pt-6 px-6 pb-4 relative">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -81,7 +99,12 @@ export default function CartModal2({ open, onClose }) {
                                                     <p id="cartItemSubTitle" className="text-xs text-gray-500">{item.subtitle}</p>
                                                 </div>
                                                 <div id="deleteBtn"
-                                                    onClick={() => removeFromCart(item.title)}
+                                                    onClick={() => {
+                                                        const ok = window.confirm("Remove this item from cart?");
+                                                        if (ok) {
+                                                            removeFromCart(item.title);
+                                                        }
+                                                    }}
                                                     className="size-8 flex items-center justify-center absolute right-0 top-0 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200 ease-in-out">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -157,7 +180,10 @@ export default function CartModal2({ open, onClose }) {
                                 </div>
                             </div>
                             <div className="bottom">
-                                <button
+                                <button onClick={() => {
+                                    setCheckoutOpen(true)
+                                    onClose()
+                                }}
                                     className="checkout h-12 w-full rounded-xl bg-[#f97316] text-white font-medium mb-4 hover:bg-[#ea580c] transition-colors duration-200 ease-in-out">
                                     Proceed to Checkout
                                 </button>
