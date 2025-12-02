@@ -19,20 +19,40 @@ export default function App() {
 
   // product states from Database
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
+        setError("");
+
         const res = await fetch(`${import.meta.env.VITE_API_URL}`);
         if (!res.ok) throw new Error("API fetch failed");
 
         const finalData = await res.json();
+
+        if (!finalData || finalData.length === 0) {
+          throw new Error("No products found");
+        }
+
         setProducts(finalData);
       }
       catch (err) {
-        console.log(err)
-        setError("Server Side Issue!!!");
+        const reload = window.confirm(
+          "⚠️ Products failed to load.\n\nPress OK to reload or Cancel to stay here."
+        );
+    
+        if (reload) {
+          fetchProducts(); 
+        } else {
+          setError("Products couldn't load.");
+        }
+    
+      } 
+      finally {
+        setLoading(false);
       }
     };
 
