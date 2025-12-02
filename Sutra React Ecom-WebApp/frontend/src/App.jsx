@@ -495,7 +495,7 @@ export default function App() {
       {/* Explore Section Ends */}
 
       {/* Section2 */}
-      <div className="py-12 flex lg:flex-nowrap flex-wrap gap-4 justify-center mr-5 lg:mr-0">
+      <div className="py-12 flex lg:flex-nowrap flex-wrap gap-4 justify-center mx-2.5 lg:mx-0">
         {["Peace", "Focus", "Wisdom", "Study", "Calm"].map((t) => (
           <p
             key={t}

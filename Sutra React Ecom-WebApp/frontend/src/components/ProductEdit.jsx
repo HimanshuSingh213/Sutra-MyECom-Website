@@ -7,6 +7,8 @@ const ADMIN_KEY = import.meta.env.VITE_ADMIN_KEY;
 function ProductEdit({ isOpen, onClose, product, setProducts }) {
     if (!isOpen) return null;
 
+    const [loading, setLoading] = useState(false);
+
     // Product details
     const [title, setTitle] = useState("");
     const [subtitle, setSubtitle] = useState("");
@@ -28,6 +30,7 @@ function ProductEdit({ isOpen, onClose, product, setProducts }) {
 
     const saveProduct = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         const updatedProduct = {
             title,
@@ -67,6 +70,9 @@ function ProductEdit({ isOpen, onClose, product, setProducts }) {
         catch (err) {
             console.error(err);
             alert("Something went wrong while updating the Data!");
+        }
+        finally {
+            setLoading(false);
         }
     }
 
@@ -149,8 +155,13 @@ function ProductEdit({ isOpen, onClose, product, setProducts }) {
                         </div>
 
                         <div className='pt-2 flex gap-3 items-center'>
-                            <button className='w-1/2 bg-[#f97316] text-white text-sm flex items-center justify-center rounded-xl py-3 px-4 hover:bg-[#ea580c] transition duration-100 ease-in-out'
-                                type="submit">Submit</button>
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className={`w-1/2 py-3 px-4 rounded-xl text-sm flex items-center justify-center ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#f97316] hover:bg-[#ea580c] text-white"}`}
+                            >
+                                {loading ? "Saving..." : "Submit"}
+                            </button>
                             <button onClick={onClose}
                                 className='w-1/2 text-gray-600 border border-gray-300 text-sm flex items-center justify-center rounded-xl py-3 px-4 hover:bg-gray-50 transition duration-100 ease-in-out'
                                 type="button">Cancel</button>
