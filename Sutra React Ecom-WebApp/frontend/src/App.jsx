@@ -43,14 +43,14 @@ export default function App() {
         const reload = window.confirm(
           "⚠️ Products failed to load.\n\nPress OK to reload or Cancel to stay here."
         );
-    
+
         if (reload) {
-          fetchProducts(); 
+          fetchProducts();
         } else {
           setError("Products couldn't load.");
         }
-    
-      } 
+
+      }
       finally {
         setLoading(false);
       }
@@ -426,7 +426,7 @@ export default function App() {
       {showOrderMsg && (
         <div className="fixed top-0 left-1/2 -translate-x-1/2 z-987 w-[90%] max-w-80 mt-4">
 
-          <div 
+          <div
             className={`bg-green-950 border border-green-400 text-green-200 p-4 rounded-xl shadow-xl flex gap-3 items-start
                   ${msgClosing ? "animate-[slideUp_.4s_ease-in_forwards]" : "animate-[slideDown_.4s_ease-out]"}`}>
 
@@ -460,20 +460,20 @@ export default function App() {
             <p className="lg:mb-5 mb-3">Sanskrit Quotes for Your Space</p>
             <p className="lg:mb-5 mb-3">Calm, meaningful, timeless wall art.</p>
             <div onClick={() => {
-              if (window.innerWidth > 1024){
+              if (window.innerWidth > 1024) {
                 window.scrollTo({
                   top: 970,
                   behavior: "smooth"
                 })
               }
-              else if(window.innerWidth < 576){
+              else if (window.innerWidth < 576) {
                 window.scrollTo({
                   top: 1100,
                   behavior: "smooth"
                 })
               }
-          
-          }}
+
+            }}
               className="bg-[#f97316] hover:bg-[#ea580c] transition-all duration-150 ease-in-out cursor-default h-12 px-9 py-6 rounded-4xl flex w-fit justify-center items-center text-white text-sm font-semibold">
               Explore Posters
             </div>
@@ -522,16 +522,30 @@ export default function App() {
 
             <div className="px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-8">
 
-              {products.map((item) => (
-                <ProductCard
-                  key={item._id}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  price={item.price}
-                  poster={item.poster}
-                />
-              ))}
+              {/* Loading state */}
+              {loading && (
+                <div className="col-span-full flex flex-col items-center gap-4 py-12">
+                  <div className="h-10 w-10 border-4 border-gray-300 border-t-[#f97316] rounded-full animate-spin"></div>
+                  <p className="text-gray-500 text-sm">Loading posters...</p>
+                </div>
+              )}
 
+              {!loading && products.length === 0 && (
+                <p className="col-span-full text-center text-gray-500">
+                  No posters available right now.
+                </p>
+              )}
+
+              {!loading &&
+                products.map((item) => (
+                  <ProductCard
+                    key={item._id}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    price={item.price}
+                    poster={item.poster}
+                  />
+                ))}
 
             </div>
           </div>
@@ -1138,13 +1152,13 @@ export default function App() {
                     <button onClick={() => {
                       if (checkoutStep === 4) {
                         resetOrderFlow();
-    
+
                         setShowOrderMsg(true);
-    
+
                         setTimeout(() => {
                           setMsgClosing(true);
                         }, 3000);
-    
+
                         setTimeout(() => {
                           setShowOrderMsg(false);
                           setMsgClosing(false);
