@@ -32,10 +32,31 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log(err));
 
 const productSchema = new mongoose.Schema({
-    title: String,
-    subtitle: String,
-    price: Number,
-    poster: String
+    title:{
+        type: String,
+        required: true,
+    },
+    subtitle:{
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        default: 0,
+        required: true,
+    },
+    stock: {
+        type: Number,
+        required: true
+    },
+    poster: {
+        type: String,
+        required: true,
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        Ref: "User",
+    }
 
 },
     { timestamps: true },
