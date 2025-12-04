@@ -4,6 +4,7 @@ import ProductCard from "./components/ProductCards";
 import { useCart } from "./context/CartContext";
 import AdminSection from "./components/AdminAuth";
 import AccessCRUD from "./components/AccessCRUD";
+import LoginPage from "./components/LoginPage";
 
 export default function App() {
 
@@ -294,8 +295,17 @@ export default function App() {
   const [msgClosing, setMsgClosing] = useState(false);
 
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   return (
     <div className="cursor-default bg-white">
+
+      <LoginPage
+      isLoggedIn = {isLoggedIn}
+      setIsLoggedIn = {setIsLoggedIn}
+      />
+
       {/* navBar Section  */}
       <div className="w-full bg-[#ffffffcc] fixed top-0 border-b border-b-gray-100 z-50 backdrop-blur-sm">
         <div className="flex justify-between px-5 py-3 max-w-[90vw] items-center box-border mx-auto my-0">
@@ -495,7 +505,7 @@ export default function App() {
       {/* Explore Section Ends */}
 
       {/* Section2 */}
-      <div className="py-12 flex lg:flex-nowrap flex-wrap gap-4 justify-center mx-2.5 lg:mx-0">
+      <div className="py-12 flex lg:flex-nowrap flex-wrap gap-4 justify-center mx-8 lg:mx-0">
         {["Peace", "Focus", "Wisdom", "Study", "Calm"].map((t) => (
           <p
             key={t}
